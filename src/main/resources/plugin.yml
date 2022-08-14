@@ -1,0 +1,9 @@
+name: Lupinus
+version: '${project.version}'
+main: com.popogonry.lupinus.Lupinus
+commands:
+  lupinus:
+  RPGItem:
+  stat:
+  player:
+  team:

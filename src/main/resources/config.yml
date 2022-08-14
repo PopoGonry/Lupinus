@@ -1,0 +1,25 @@
+# ########################################################### #
+# Lupinus Plugin Developer: PopoGonry ( rhtjdsh35@gmail.com ) #
+# ########################################################### #
+
+# Lupinus Plugin Config File #
+
+
+STR-strikingPower-coefficient: 1.0
+
+DEF-defensivePower-coefficient: 1.0
+
+# Default Minecraft MoveSpeed is '0.2' / Max = '1.0' / Min = '-1.0'
+DEX-moveSpeed-coefficient: 0.001
+
+DEX-criticalChance-coefficient: 1.0
+
+HP-healthPoints-coefficient: 1.0
+
+statpoint-per-level: 3.0
+
+criticalDamage-coefficient: 1.5
+
+default-healthPoints: 20.0
+
+healthPoints-per-level: 1.0
