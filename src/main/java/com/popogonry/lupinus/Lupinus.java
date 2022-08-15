@@ -9,6 +9,7 @@ import com.popogonry.lupinus.stat.StatEvent;
 import com.popogonry.lupinus.stat.StatReference;
 import com.popogonry.lupinus.team.TeamCommand;
 import com.popogonry.lupinus.team.TeamEvent;
+import com.popogonry.lupinus.team.TeamReference;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -45,9 +46,11 @@ public final class Lupinus extends JavaPlugin implements Listener {
 
         StatReference.statDM.setPlugin(this);
         Reference.configDM.setPlugin(this);
+        TeamReference.teamDM.setPlugin(this);
 
         Reference.loadConfigLoad();
         StatReference.onlinePlayerLoadStatData();
+        TeamReference.loadTeamData();
 
         Bukkit.getConsoleSender().sendMessage(Reference.prefix_normal + "플러그인이 §a활성화§r되었습니다. §r| 포포곤리(PopoGonry)");
     }
@@ -55,6 +58,7 @@ public final class Lupinus extends JavaPlugin implements Listener {
     public void onDisable() {
         //Reference.saveConfigLoad();
         StatReference.onlinePlayerSaveStatData();
+        TeamReference.saveTeamData();
 
         Bukkit.getConsoleSender().sendMessage(Reference.prefix_normal + "플러그인이 §c비활성화§r되었습니다. §r| 포포곤리(PopoGonry)");
     }
