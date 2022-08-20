@@ -1,6 +1,7 @@
 package com.popogonry.lupinus.stat;
 
 import com.popogonry.lupinus.Reference;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,16 +31,22 @@ public class StatCommand implements CommandExecutor {
                 player.sendMessage(StatReference.statHashMap.toString());
             }
         }
-
-        if(args.length == 3) {
-            if(args[0].equalsIgnoreCase("set")) {
-                HashMap<String, Integer> playerStatHashMap = new HashMap<>(StatReference.statHashMap.get(player.getUniqueId()));
+        if(args[0].equalsIgnoreCase("set")) {
+            Player commandPlayer;
+            if (args.length == 3) {
+                commandPlayer = player;
+                HashMap<String, Integer> playerStatHashMap = new HashMap<>(StatReference.statHashMap.get(commandPlayer.getUniqueId()));
                 playerStatHashMap.put(args[1].toUpperCase(), Integer.valueOf(args[2]));
                 StatReference.statHashMap.put(player.getUniqueId(), playerStatHashMap);
-                player.sendMessage(Reference.prefix_normal + args[1].toUpperCase() + "스텟이 " + args[2] + "으로 변경되었습니다.");
+                player.sendMessage(Reference.prefix_normal + commandPlayer.getName() + "의 " + args[1].toUpperCase() + "스텟이 " + args[2] + "으로 변경되었습니다.");
+            } else if (args.length == 4) {
+                commandPlayer = Bukkit.getServer().getPlayer(args[1]);
+                HashMap<String, Integer> playerStatHashMap = new HashMap<>(StatReference.statHashMap.get(commandPlayer.getUniqueId()));
+                playerStatHashMap.put(args[2].toUpperCase(), Integer.valueOf(args[3]));
+                StatReference.statHashMap.put(player.getUniqueId(), playerStatHashMap);
+                player.sendMessage(Reference.prefix_normal + commandPlayer.getName() + "의 " + args[2].toUpperCase() + "스텟이 " + args[3] + "으로 변경되었습니다.");
             }
         }
-
         return false;
     }
 }

@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Reference {
-    public static String prefix_normal = "§r§f「§6Lupinus§r§f」§7 §r";
-    public static String prefix_opMessage = "§r§f「§6Lupinus §f- §BOP Message§r§f」§7 §r";
-    public static String prefix_error = "§r§c「Lupinus」 §7";
-    public static String prefix_dataError = "§r§c「Lupinus - Data Error」 §7";
-    public static String prefix_dataLoad = "§r§f「§6Lupinus §f- §BData Load§r§f」§7 §r";
-    public static String prefix_dataSave = "§r§f「§6Lupinus §f- §BData Save§r§f」§7 §r";
-
+    public static String prefix_normal = "§r§f「§6§lLupinus§r§f」§7 §r";
+    public static String prefix_opMessage = "§r§f「§6§lLupinus §f- §bOP Message§r§f」§7 §r";
+    public static String prefix_error = "§r§c「§lLupinus」 §7";
+    public static String prefix_dataError = "§r§c「§lLupinus - Data Error」 §7";
+    public static String prefix_dataLoad = "§r§f「§6§lLupinus §f- §b§lData Load§r§f」§7 §r";
+    public static String prefix_dataSave = "§r§f「§6§lLupinus §f- §b§lData Save§r§f」§7 §r";
+    public static String prefix_team = "§r§f「§6§lLupinus §f- §b§lTeam§r§f」§7 §r";
     public static String COMMAND_CMD_NOT_PRACTICE_MESSAGE = "버킷창에서는 실행되지 않으니, 게임에서 명령어를 실행해주시기 바랍니다";
 
 
@@ -51,4 +51,13 @@ public class Reference {
         put("default-healthPoints", (double) 0);
         put("healthPoints-per-level", (double) 0);
     }};
+
+    public static String uuidToName(String uuid) {
+        return new String();
+    }
+    public static String nameToUUID(String name) {
+
+        return new String();
+    }
+
 }

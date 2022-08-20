@@ -2,6 +2,7 @@ package com.popogonry.lupinus.team;
 
 import com.popogonry.lupinus.Reference;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,6 +33,18 @@ public class TeamCommand implements CommandExecutor {
             else if(args[0].equalsIgnoreCase("reset")) {
                 TeamReference.teamHashMap.clear();
             }
+            else if(args[0].equalsIgnoreCase("list")) {
+                TeamReference.showTeamList(player);
+            }
+            else if(args[0].equalsIgnoreCase("showall")) {
+                TeamReference.showTeamAll(player);
+            }
+            else if(args[0].equalsIgnoreCase("head")) {
+                player.getInventory().addItem(TeamReference.getHead(player));
+            }
+            else if(args[0].equalsIgnoreCase("gui")) {
+                TeamGUI.openTeamGUI(player, 1);
+            }
         }
         else if(args.length == 2) {
             if(args[0].equalsIgnoreCase("create")) {
@@ -45,8 +58,13 @@ public class TeamCommand implements CommandExecutor {
             if(args[0].equalsIgnoreCase("rename")) {
                 player.sendMessage(String.valueOf(TeamReference.renameTeam(args[1], args[2])));
             }
-            else if(args[0].equalsIgnoreCase("add")) {
-                player.sendMessage(String.valueOf(TeamReference.addMember(args[1], Bukkit.getPlayer(args[2]))));
+            if(Bukkit.getPlayer(args[2]) instanceof Player) {
+                if(args[0].equalsIgnoreCase("add")) {
+                    player.sendMessage(String.valueOf(TeamReference.addMember(args[1], Bukkit.getPlayer(args[2]))));
+                }
+                else if(args[0].equalsIgnoreCase("remove")) {
+                    player.sendMessage(String.valueOf(TeamReference.removeMember(args[1], Bukkit.getPlayer(args[2]))));
+                }
             }
         }
 

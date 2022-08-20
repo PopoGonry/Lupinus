@@ -1,5 +1,8 @@
 package com.popogonry.lupinus;
 
+import com.popogonry.lupinus.item.ItemBan.ItemBanCommand;
+import com.popogonry.lupinus.item.ItemBan.ItemBanEvent;
+import com.popogonry.lupinus.item.ItemBan.ItemBanReference;
 import com.popogonry.lupinus.item.rpgitem.RPGItemCommand;
 import com.popogonry.lupinus.item.rpgitem.RPGItemEvent;
 import com.popogonry.lupinus.player.PlayerCommand;
@@ -24,6 +27,7 @@ public final class Lupinus extends JavaPlugin implements Listener {
     LupinusEvent lupinusEvent = new LupinusEvent();
     PlayerEvent playerEvent = new PlayerEvent();
     TeamEvent teamEvent = new TeamEvent();
+    ItemBanEvent itemBanEvent = new ItemBanEvent();
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this.rpgItemEvent, this);
@@ -31,11 +35,13 @@ public final class Lupinus extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this.lupinusEvent, this);
         getServer().getPluginManager().registerEvents(this.playerEvent, this);
         getServer().getPluginManager().registerEvents(this.teamEvent, this);
+        getServer().getPluginManager().registerEvents(this.itemBanEvent, this);
         getCommand("lupinus").setExecutor(new LupinusCommand());
         getCommand("RPGItem").setExecutor(new RPGItemCommand());
         getCommand("stat").setExecutor(new StatCommand());
         getCommand("player").setExecutor(new PlayerCommand());
         getCommand("team").setExecutor(new TeamCommand());
+        getCommand("itemban").setExecutor(new ItemBanCommand());
 
         File file = new File(this.getDataFolder() + "/");
         if(!file.exists()){
@@ -47,10 +53,12 @@ public final class Lupinus extends JavaPlugin implements Listener {
         StatReference.statDM.setPlugin(this);
         Reference.configDM.setPlugin(this);
         TeamReference.teamDM.setPlugin(this);
+        ItemBanReference.itemBanDM.setPlugin(this);
 
         Reference.loadConfigLoad();
         StatReference.onlinePlayerLoadStatData();
         TeamReference.loadTeamData();
+        ItemBanReference.loadBanItemData();
 
         Bukkit.getConsoleSender().sendMessage(Reference.prefix_normal + "플러그인이 §a활성화§r되었습니다. §r| 포포곤리(PopoGonry)");
     }
@@ -59,6 +67,7 @@ public final class Lupinus extends JavaPlugin implements Listener {
         //Reference.saveConfigLoad();
         StatReference.onlinePlayerSaveStatData();
         TeamReference.saveTeamData();
+        ItemBanReference.saveBanItemData();
 
         Bukkit.getConsoleSender().sendMessage(Reference.prefix_normal + "플러그인이 §c비활성화§r되었습니다. §r| 포포곤리(PopoGonry)");
     }

@@ -82,6 +82,7 @@ public class PlayerReference {
         Random random = new Random();
         if(random.nextInt(100000) < (criticalChance + (DEX * Reference.configDataHashMap.get("DEX-criticalChance-coefficient")))*1000) {
             criticalDamageCoefficient = Reference.configDataHashMap.get("criticalDamage-coefficient");
+            attacker.sendMessage(Reference.prefix_normal + "크리티컬!");
         }
 
         double resultDamage =
@@ -104,7 +105,7 @@ public class PlayerReference {
         ));
 
         // player
-        double moveSpeed = 0.2;
+        double moveSpeed = 0.2 * 1000;
         int DEX = (int) StatReference.statHashMap.get(player.getUniqueId()).get("DEX");
 
 
@@ -118,7 +119,7 @@ public class PlayerReference {
             DEX += valueMap.get(RPGItemReference.prefix_DEX);
         }
 
-        double resultMoveSpeed = moveSpeed + (DEX * Reference.configDataHashMap.get("DEX-moveSpeed-coefficient"));
+        double resultMoveSpeed = (moveSpeed/1000) + (DEX * Reference.configDataHashMap.get("DEX-moveSpeed-coefficient"));
         if(resultMoveSpeed > 1) {
             resultMoveSpeed = 1;
         }

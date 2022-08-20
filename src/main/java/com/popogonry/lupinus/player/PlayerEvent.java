@@ -2,12 +2,14 @@ package com.popogonry.lupinus.player;
 
 import com.popogonry.lupinus.item.rpgitem.RPGItemReference;
 import com.popogonry.lupinus.stat.StatReference;
+import org.bukkit.Statistic;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -43,6 +45,10 @@ public class PlayerEvent implements Listener {
             Player player = (Player) event.getPlayer();
             ItemStack item = player.getItemInHand();
             player.setMaxHealth(PlayerReference.calculationHealthPoints(player, item));
+            double moveSpeed = PlayerReference.calculationMoveSpeed(player, item);
+            player.setWalkSpeed((float) moveSpeed);
+            player.setFlySpeed((float) moveSpeed);
+            player.setFoodLevel(19);
         }
     }
     @EventHandler
@@ -51,7 +57,12 @@ public class PlayerEvent implements Listener {
         ItemStack item = player.getItemInHand();
         player.setMaxHealth(PlayerReference.calculationHealthPoints(player, item));
     }
-
+    @EventHandler
+    public static void playerFoodLevelChangeEvent(FoodLevelChangeEvent event) {
+        if(event.getEntity() instanceof Player) {
+            event.setCancelled(true);
+        }
+    }
     @EventHandler
     public static void playerAttackEvent(EntityDamageByEntityEvent event) {
         if(event.getDamager() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {

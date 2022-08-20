@@ -51,9 +51,16 @@ public class RPGItemEvent implements Listener {
             }
             else if(54 <= event.getRawSlot() && event.getRawSlot() <= 89) {
                 ItemStack item = new ItemStack(event.getCurrentItem());
+                String itemName = "";
+                if(item.getItemMeta().getDisplayName() == null) {
+                    itemName = "§6RPGItem";
+                }
+                else {
+                    itemName = item.getItemMeta().getDisplayName();
+                }
 
                 if(event.getCurrentItem().getItemMeta().getLore() == null) {
-                    item = RPGItemReference.createRPGItem(item,event.getCurrentItem().getItemMeta().getDisplayName(), "§aRPGItem Lore", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    item = RPGItemReference.createRPGItem(item, itemName, "§aRPGItem Lore", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 }
 
                 ItemMeta itemMeta = item.getItemMeta();
@@ -75,7 +82,7 @@ public class RPGItemEvent implements Listener {
                         event.getInventory());
 
             }
-            //player.sendMessage(event.getSlot() + " / " + event.getRawSlot()); 슬록 확인
+//            player.sendMessage(event.getSlot() + " / " + event.getRawSlot()); 슬록 확인
 
         }
     }
