@@ -4,9 +4,12 @@ import com.popogonry.lupinus.DataManager;
 import com.popogonry.lupinus.Reference;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ItemBanReference {
@@ -42,7 +45,11 @@ public class ItemBanReference {
         return true;
     }
     public static boolean addBanItem(ItemStack item) {
-        ItemStack banItem = new ItemStack(item.getType());
+        ItemStack banItem = new ItemStack(item);
+        ItemMeta itemMeta = banItem.getItemMeta();
+        itemMeta.setLore(Collections.emptyList());
+        banItem.setItemMeta(itemMeta);
+        banItem.setAmount(1);
         if(!banItemList.contains(banItem)) {
             banItemList.add(banItem);
             return true;
@@ -53,7 +60,11 @@ public class ItemBanReference {
 
     }
     public static boolean removeBanItem(ItemStack item) {
-        ItemStack banItem = new ItemStack(item.getType());
+        ItemStack banItem = new ItemStack(item);
+        ItemMeta itemMeta = banItem.getItemMeta();
+        itemMeta.setLore(Collections.emptyList());
+        banItem.setItemMeta(itemMeta);
+        banItem.setAmount(1);
         if(banItemList.contains(banItem)) {
             banItemList.remove(banItem);
             return true;

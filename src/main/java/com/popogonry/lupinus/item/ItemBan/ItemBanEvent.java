@@ -8,6 +8,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
+
+import java.util.Collections;
 
 public class ItemBanEvent implements Listener {
 
@@ -15,7 +19,12 @@ public class ItemBanEvent implements Listener {
     public static void PlayerUseBanItemEvent(PlayerInteractEvent event) {
         if(!event.getPlayer().isOp()) {
             if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if(ItemBanReference.banItemList.contains(new ItemStack(event.getPlayer().getItemInHand().getType()))) {
+                ItemStack banItem = new ItemStack(event.getPlayer().getItemInHand());
+                ItemMeta itemMeta = banItem.getItemMeta();
+                itemMeta.setLore(Collections.emptyList());
+                banItem.setItemMeta(itemMeta);
+                banItem.setAmount(1);
+                if(ItemBanReference.banItemList.contains(banItem)) {
                     event.setCancelled(true);
                 }
             }
