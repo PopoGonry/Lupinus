@@ -1,14 +1,10 @@
 package com.popogonry.lupinus.item.ItemBan;
 
 import com.popogonry.lupinus.Reference;
-import com.popogonry.lupinus.stat.StatReference;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 public class ItemBanCommand implements CommandExecutor {
     @Override
@@ -25,11 +21,8 @@ public class ItemBanCommand implements CommandExecutor {
             else if (args[0].equalsIgnoreCase("load")) {
                 ItemBanReference.loadBanItemData();
             }
-            else if (args[0].equalsIgnoreCase("add")) {
-                ItemBanReference.banItemList.add(player.getItemInHand());
-            }
-            else if (args[0].equalsIgnoreCase("show")) {
-                player.sendMessage(ItemBanReference.banItemList.toString());
+            else if (args[0].equalsIgnoreCase("gui")) {
+                ItemBanGUI.openBanItemGUI(player, 0);
             }
         }
         return false;
