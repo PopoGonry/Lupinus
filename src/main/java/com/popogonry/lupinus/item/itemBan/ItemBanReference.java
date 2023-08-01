@@ -1,4 +1,4 @@
-package com.popogonry.lupinus.item.ItemBan;
+package com.popogonry.lupinus.item.itemBan;
 
 import com.popogonry.lupinus.DataManager;
 import com.popogonry.lupinus.Reference;
@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

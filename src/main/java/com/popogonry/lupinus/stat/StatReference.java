@@ -43,10 +43,10 @@ public class StatReference {
         }
         else {
             HashMap<String, Integer> playerStatHashMap = new HashMap<String, Integer>(5){{
-                put("STR", (Integer) statDM.getConfig().get("data." + player.getUniqueId() + ".STR"));
-                put("DEF", (Integer) statDM.getConfig().get("data." + player.getUniqueId() + ".DEF"));
-                put("DEX", (Integer) statDM.getConfig().get("data." + player.getUniqueId() + ".DEX"));
-                put("HP", (Integer) statDM.getConfig().get("data." + player.getUniqueId() + ".HP"));
+                put("STR", (int) statDM.getConfig().get("data." + player.getUniqueId() + ".STR"));
+                put("DEF", (int) statDM.getConfig().get("data." + player.getUniqueId() + ".DEF"));
+                put("DEX", (int) statDM.getConfig().get("data." + player.getUniqueId() + ".DEX"));
+                put("HP", (int) statDM.getConfig().get("data." + player.getUniqueId() + ".HP"));
                 put("STATPOINT", (Integer) statDM.getConfig().get("data." + player.getUniqueId() + ".STATPOINT"));
             }};
             statHashMap.remove(player.getUniqueId());
@@ -63,7 +63,7 @@ public class StatReference {
         Bukkit.getConsoleSender().sendMessage(Reference.prefix_dataLoad + "온라인 플레이어 스텟 데이터 로드 완료" + " (" + statDM.fileName + ")");
     }
 
-    public static void PlayerJoinStatSetting(Player player) {
+    public static void playerJoinStatSetting(Player player) {
         if(!loadStatData(player)) {
             HashMap<String, Integer> playerStatHashMap = new HashMap<String, Integer>(5){{
                 put("STR", 0);
@@ -72,10 +72,42 @@ public class StatReference {
                 put("HP", 0);
                 put("STATPOINT", 0);
             }};
-            statHashMap.remove(player.getUniqueId());
-            StatReference.statHashMap.put(player.getUniqueId(), playerStatHashMap);
+            statHashMap.put(player.getUniqueId(), playerStatHashMap);
             saveStatData(player);
+            loadStatData(player);
             Bukkit.getConsoleSender().sendMessage(Reference.prefix_normal + player.getName() + " 스텟 데이터 세팅 완료" + " (" + statDM.fileName + ")");
         }
     }
+    public static boolean investStat(Player player, String stat) {
+        HashMap playerStatHashMap = statHashMap.get(player.getUniqueId());
+        if((int) playerStatHashMap.get("STATPOINT") >= 1) {
+            playerStatHashMap.put("STATPOINT", (int) playerStatHashMap.get("STATPOINT") - 1);
+            if(stat.equalsIgnoreCase("HP")) {
+                playerStatHashMap.put("HP", (int) playerStatHashMap.get("HP") + 1);
+            }
+            else if(stat.equalsIgnoreCase("STR")) {
+                playerStatHashMap.put("STR", (int) playerStatHashMap.get("STR") + 1);
+            }
+            else if(stat.equalsIgnoreCase("DEF")) {
+                playerStatHashMap.put("DEF", (int) playerStatHashMap.get("DEF") + 1);
+            }
+            else if(stat.equalsIgnoreCase("DEX")) {
+                playerStatHashMap.put("DEX", (int) playerStatHashMap.get("DEX") + 1);
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static int getTotalStat(Player player) {
+        int totalStat = 0;
+        HashMap<String, Integer> playerStatHashMap = statHashMap.get(player.getUniqueId());
+        for(int stat : playerStatHashMap.values()) {
+            totalStat += stat;
+        }
+        return totalStat;
+    }
+
 }

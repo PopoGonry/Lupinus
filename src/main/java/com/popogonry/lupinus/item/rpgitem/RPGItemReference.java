@@ -4,15 +4,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class RPGItemReference {
     // 이속(dex) / 공격(str) / 방어(def) / 체력(hp) / 공격력 / 흡혈 / 방어력무시 / 치명타확률 / 방어력 / 이동속도 / 레벨제한 / 설명
     // 이름(name) / 설명(lore) / 공격력(strikingPower) / 방어력(defensivePower) / 치명타확률(criticalChance) / 이동속도(moveSpeed) / 흡혈(lifeSteal) / 방어력무시(defenseIgnore) / 공격(STR) / 방어(DEF) / 이속(DEX) / 체력(HP) / 레벨제한(levelLimit)
-
+    public static HashMap<UUID, HashMap<String, Integer>> rpgItemCopyDataHashMap = new HashMap<>();
     public static ItemStack createRPGItem(ItemStack item, String name, String lore, int strikingPower, int defensivePower, int criticalChance, int moveSpeed, int lifeSteal, int defenseIgnore, int STR, int DEF, int DEX, int HP, int levelLimit) {
         ItemStack itemStack = new ItemStack(item);
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -156,6 +153,7 @@ public class RPGItemReference {
         for (String s : itemLore) {
             if (s.contains(type)) {
                 List<String> values = Arrays.asList(s.split(":"));
+                values.set(1, values.get(1).replace("%", ""));
                 return Integer.parseInt(values.get(1).replace(" ", ""));
             }
         }

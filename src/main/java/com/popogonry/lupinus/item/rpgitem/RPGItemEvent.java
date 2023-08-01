@@ -1,5 +1,6 @@
 package com.popogonry.lupinus.item.rpgitem;
 
+import com.popogonry.lupinus.GUI;
 import com.popogonry.lupinus.Reference;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -81,9 +83,8 @@ public class RPGItemEvent implements Listener {
                         valueHashMap.get(RPGItemReference.prefix_levelLimit),
                         event.getInventory());
 
+                GUI.setGuiItem(RPGItemReference.prefix_accept, 145, 0, 1, Arrays.asList("§6§l변경사항"), 37, event.getInventory());
             }
-//            player.sendMessage(event.getSlot() + " / " + event.getRawSlot()); 슬록 확인
-
         }
     }
 

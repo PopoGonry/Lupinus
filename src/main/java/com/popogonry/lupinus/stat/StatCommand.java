@@ -30,20 +30,34 @@ public class StatCommand implements CommandExecutor {
             else if(args[0].equalsIgnoreCase("showall")) {
                 player.sendMessage(StatReference.statHashMap.toString());
             }
+            else if(args[0].contains("inv")) {
+                if(args[0].equalsIgnoreCase("invhp")) {
+                    StatReference.investStat(player, "HP");
+                }
+                else if(args[0].equalsIgnoreCase("invstr")) {
+                    StatReference.investStat(player, "STR");
+                }
+                else if(args[0].equalsIgnoreCase("invdef")) {
+                    StatReference.investStat(player, "DEF");
+                }
+                else if(args[0].equalsIgnoreCase("invdex")) {
+                    StatReference.investStat(player, "DEX");
+                }
+                Reference.sendDataToClient(player);
+            }
         }
         if(args[0].equalsIgnoreCase("set")) {
             Player commandPlayer;
             if (args.length == 3) {
-                commandPlayer = player;
-                HashMap<String, Integer> playerStatHashMap = new HashMap<>(StatReference.statHashMap.get(commandPlayer.getUniqueId()));
+                HashMap<String, Integer> playerStatHashMap = new HashMap<>(StatReference.statHashMap.get(player.getUniqueId()));
                 playerStatHashMap.put(args[1].toUpperCase(), Integer.valueOf(args[2]));
                 StatReference.statHashMap.put(player.getUniqueId(), playerStatHashMap);
-                player.sendMessage(Reference.prefix_normal + commandPlayer.getName() + "의 " + args[1].toUpperCase() + "스텟이 " + args[2] + "으로 변경되었습니다.");
+                player.sendMessage(Reference.prefix_normal + player.getName() + "의 " + args[1].toUpperCase() + "스텟이 " + args[2] + "으로 변경되었습니다.");
             } else if (args.length == 4) {
                 commandPlayer = Bukkit.getServer().getPlayer(args[1]);
                 HashMap<String, Integer> playerStatHashMap = new HashMap<>(StatReference.statHashMap.get(commandPlayer.getUniqueId()));
                 playerStatHashMap.put(args[2].toUpperCase(), Integer.valueOf(args[3]));
-                StatReference.statHashMap.put(player.getUniqueId(), playerStatHashMap);
+                StatReference.statHashMap.put(commandPlayer.getUniqueId(), playerStatHashMap);
                 player.sendMessage(Reference.prefix_normal + commandPlayer.getName() + "의 " + args[2].toUpperCase() + "스텟이 " + args[3] + "으로 변경되었습니다.");
             }
         }

@@ -1,4 +1,4 @@
-package com.popogonry.lupinus.item.ItemBan;
+package com.popogonry.lupinus.item.itemBan;
 
 import com.popogonry.lupinus.Reference;
 import org.bukkit.command.Command;

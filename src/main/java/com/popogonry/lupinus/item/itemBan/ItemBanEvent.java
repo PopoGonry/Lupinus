@@ -1,4 +1,4 @@
-package com.popogonry.lupinus.item.ItemBan;
+package com.popogonry.lupinus.item.itemBan;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,7 +9,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 
 import java.util.Collections;
 
@@ -31,12 +30,7 @@ public class ItemBanEvent implements Listener {
         }
 
     }
-
-
-
-
-
-
+    
     @EventHandler
     public static void ItemBanGUIClickEvent(InventoryClickEvent event) {
         if (((event.getView().getTitle().contains("BanItemGUI"))) &&
@@ -55,7 +49,7 @@ public class ItemBanEvent implements Listener {
                     ItemBanGUI.openBanItemGUI(player, (page - 1));
                 }
                 else if(event.getRawSlot() == 50 && event.getCurrentItem().getItemMeta().getDisplayName().contains("▶ 다음장")) {
-                    ItemBanGUI.openBanItemGUI(player, (1));
+                    ItemBanGUI.openBanItemGUI(player, (page + 1));
                 }
             }
             else if(54 <= event.getRawSlot() && event.getRawSlot() <= 89) {
